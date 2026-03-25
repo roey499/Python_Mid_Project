@@ -4,6 +4,7 @@ import pandas as pd
 from pathlib import Path
 import os
 from datetime import datetime, timedelta
+
 #API_KEY = "X8X2LQ8OP5LLZNSH"
 #url = f"https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=ILS&apikey={API_KEY}"
 
@@ -46,32 +47,25 @@ data = {
       "4. close": "3.12060"
     }
   }
+
+
 }
-
-print(type(data))
-
-#last_date in dict 
-last_date = list(data["Time Series FX (Daily)"].keys())
-last_date = sorted(last_date,reverse=True)[0]   
-latest_date = datetime.strptime(last_date, "%Y-%m-%d") # convert to datetime object
 
 sorted_items = sorted(data["Time Series FX (Daily)"].items(), key = lambda x:x[0],reverse=True)
 
 data_desc = dict(sorted_items)
 
-print(data_desc)
-
+# return DAYS_PREV days from data_desc
 for date_str in list(data_desc.keys())[:DAYS_PREV]:
     print(date_str)
     with open (DATA_DIR/f"{date_str}.json",'wt',encoding='utf-8') as f:
         json.dump(data_desc[date_str],f,indent=2)
 
-#time_series = data["Time Series FX (Daily)"]["2026-03-18"]
 
 exit()
 
 
-data_s = json.dumps(data, indent = 2)
+
 
 #print(json.dumps(data,indent = 2))
 
