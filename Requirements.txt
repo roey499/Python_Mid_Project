@@ -1,4 +1,0 @@
-pip install requests
-pip install pandas
-pip install seaborn
-pip install matplotlib
