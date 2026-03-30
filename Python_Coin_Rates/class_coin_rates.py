@@ -79,6 +79,11 @@ class CoinRate:
         self.log_file = self.data_dir_logs / "log.log"
         self.log_file.touch(exist_ok=True)  
         url = self.url
+        logging.basicConfig(
+                            filename=self.log_file, 
+                            level=logging.INFO, 
+                            format='%(asctime)s - %(levelname)s - %(message)s'
+                            )
 
         try:
             start = time.time()
@@ -107,7 +112,7 @@ class CoinRate:
         return log_dict
 
 
-test = CoinRate("X8X2LQ8OP5LLZNSH","USD","ILS")
+test = CoinRate("0XYM15TH4D8AIHSE","USD","ILS")
 data = test.get_data(7)
 result = test.save_as_db("data_coin_rates.db","value_rates",{"Date":"TEXT","close_value":"REAL"},data)
 #get log
